@@ -1569,13 +1569,13 @@ useEffect(() => {
   const fetchSensorData = async () => {
     try {
       const response = await fetch(
-      "https://smart-agri-backend-b2td.onrender.com/get-sensors"
+       "https://smart-agri-backend-b2td.onrender.com/get-sensors"
       );
 
       const data = await response.json();
       
       const historyResponse = await fetch(
- "https://smart-agri-backend-b2td.onrender.com/get-sensors"
+"https://smart-agri-backend-b2td.onrender.com/sensor-history"
 );
 
 const historyData = await historyResponse.json();
