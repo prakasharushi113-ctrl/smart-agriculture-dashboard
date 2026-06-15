@@ -277,7 +277,7 @@ body {
   display: flex; align-items: center; justify-content: center;
   flex-shrink: 0;
 }
-.board-badge-chevron { font-size: 0.7rem; opacity: 0.7; margin-left: 2px; }
+
 
 /* ── Menu ── */
 
@@ -330,7 +330,7 @@ body {
 }
 
 .sidebar-content h2 { font-size: 3.2rem; line-height: 0.9; color: white; font-weight: 500; }
-.sidebar-content p  { color: rgba(255,255,255,0.9); line-height: 1.7; font-size: 1.05rem; }
+.sidebar-content p  { color: #ffffff; line-height: 1.7; font-size: 1.05rem; }
 
 .connected-board { display: flex; align-items: center; gap: 8px; font-size: 0.85rem; color: rgba(255,255,255,0.85); font-weight: 500; }
 
@@ -354,10 +354,19 @@ body {
 
 /* ── Grid ── */
 
-.grid {
-  flex: 1; display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 30px; padding: 40px; align-content: start;
+
+.dashboard {
+  flex: 1;
+  padding: 24px;
+  overflow-y: auto;
+}
+
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+  gap: 24px;
+  width: 100%;
+  align-items: start;
 }
 
 /* ── Cards ── */
