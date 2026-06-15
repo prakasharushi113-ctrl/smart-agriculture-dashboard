@@ -17,60 +17,7 @@ const BOARDS = [
       </svg>
     ),
   },
-  {
-    id: "esp32",
-    name: "ESP32",
-    short: "ESP32",
-    color: "#2563eb",
-    icon: (
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <rect x="3" y="6" width="18" height="12" rx="2" stroke="white" strokeWidth="1.5" />
-        <line x1="7" y1="6" x2="7" y2="4" stroke="white" strokeWidth="1.5" strokeLinecap="round" />
-        <line x1="10" y1="6" x2="10" y2="4" stroke="white" strokeWidth="1.5" strokeLinecap="round" />
-        <line x1="13" y1="6" x2="13" y2="4" stroke="white" strokeWidth="1.5" strokeLinecap="round" />
-        <line x1="17" y1="6" x2="17" y2="4" stroke="white" strokeWidth="1.5" strokeLinecap="round" />
-        <line x1="7" y1="18" x2="7" y2="20" stroke="white" strokeWidth="1.5" strokeLinecap="round" />
-        <line x1="10" y1="18" x2="10" y2="20" stroke="white" strokeWidth="1.5" strokeLinecap="round" />
-        <line x1="13" y1="18" x2="13" y2="20" stroke="white" strokeWidth="1.5" strokeLinecap="round" />
-        <line x1="17" y1="18" x2="17" y2="20" stroke="white" strokeWidth="1.5" strokeLinecap="round" />
-        <rect x="8" y="9" width="8" height="6" rx="1" fill="white" fillOpacity="0.25" stroke="white" strokeWidth="1" />
-        <text x="12" y="13.5" textAnchor="middle" fill="white" fontSize="3.5" fontWeight="bold">ESP</text>
-      </svg>
-    ),
-  },
-  {
-    id: "arduino-uno",
-    name: "Arduino UNO",
-    short: "Arduino UNO",
-    color: "#00878a",
-    icon: (
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <rect x="2" y="7" width="20" height="10" rx="2" stroke="white" strokeWidth="1.5" />
-        <circle cx="7" cy="12" r="2.5" stroke="white" strokeWidth="1.5" />
-        <circle cx="17" cy="12" r="2.5" stroke="white" strokeWidth="1.5" />
-        <line x1="9.5" y1="11" x2="14.5" y2="11" stroke="white" strokeWidth="1.2" strokeLinecap="round" />
-        <line x1="9.5" y1="13" x2="14.5" y2="13" stroke="white" strokeWidth="1.2" strokeLinecap="round" />
-      </svg>
-    ),
-  },
-  {
-    id: "arduino-nano",
-    name: "Arduino Nano",
-    short: "Arduino Nano",
-    color: "#00878a",
-    icon: (
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <rect x="5" y="4" width="14" height="16" rx="2" stroke="white" strokeWidth="1.5" />
-        <line x1="8" y1="4" x2="8" y2="2" stroke="white" strokeWidth="1.5" strokeLinecap="round" />
-        <line x1="11" y1="4" x2="11" y2="2" stroke="white" strokeWidth="1.5" strokeLinecap="round" />
-        <line x1="14" y1="4" x2="14" y2="2" stroke="white" strokeWidth="1.5" strokeLinecap="round" />
-        <line x1="8" y1="20" x2="8" y2="22" stroke="white" strokeWidth="1.5" strokeLinecap="round" />
-        <line x1="11" y1="20" x2="11" y2="22" stroke="white" strokeWidth="1.5" strokeLinecap="round" />
-        <line x1="14" y1="20" x2="14" y2="22" stroke="white" strokeWidth="1.5" strokeLinecap="round" />
-        <rect x="8" y="8" width="8" height="5" rx="1" fill="white" fillOpacity="0.2" stroke="white" strokeWidth="1" />
-      </svg>
-    ),
-  },
+  
 ];
 
 const SIDEBAR_IMAGES = [
@@ -109,7 +56,7 @@ const TYPE_INFO = {
   soil:        { emoji: "🌱", description: "Volumetric soil moisture content at root zone depth.", range: "Ideal: 40% – 75%", color: "#27ae60", sensor: "Capacitive v1.2", protocol: "Analog (ADC)", dataRate: "1 Hz", resolution: "0.1%", accuracy: "±3%" },
   wind:        { emoji: "💨", description: "Wind speed at crop canopy height via anemometer.", range: "Normal: 0 – 30 km/h", color: "#16a085", sensor: "Cup Anemometer", protocol: "Pulse Frequency", dataRate: "1 Hz", resolution: "0.1 km/h", accuracy: "±0.5 km/h" },
   light:       { emoji: "☀️", description: "Photosynthetically active radiation (PAR) reaching crops.", range: "Ideal: 400 – 700 lux", color: "#f39c12", sensor: "BH1750", protocol: "I²C", dataRate: "1 Hz", resolution: "1 lux", accuracy: "±20%" },
-  proximity:   { emoji: "📡", description: "HC-SR04 Ultrasonic sensor measuring distance to nearest object.", range: "Range: 2 cm – 400 cm", color: "#6366f1", sensor: "HC-SR04", protocol: "GPIO Trigger/Echo", dataRate: "5 Hz", resolution: "0.3 cm", accuracy: "±3 mm" },
+  
   motion:      { emoji: "🚨", description: "PIR motion sensor detecting movement in the field.", range: "Detection angle: 120°", color: "#dc2626", sensor: "PIR HC-SR501", protocol: "GPIO Digital", dataRate: "Event-based", resolution: "N/A", accuracy: "±0" },
   ph: {
   emoji: "⚗️",
@@ -797,393 +744,7 @@ return (
     </div>
   );
 }
-
-// ── Proximity Detail Modal ────────────────────────────────────────────────────
-
-function ProximityDetailModal({ proximity, onClose }) {
-  const info = TYPE_INFO.proximity;
-  const distColor = proximity.distance < 30 ? "#ef4444" : proximity.distance < 80 ? "#f59e0b" : "#22c55e";
-  const distLabel = proximity.distance < 30 ? "Very Close" : proximity.distance < 80 ? "Near" : "Clear";
-
-  return (
-    <div className="modal-overlay" onClick={onClose}>
-      <div className="modal detail-modal" onClick={(e) => e.stopPropagation()}>
-        <div className="detail-modal-header" style={{ borderBottom: `3px solid ${info.color}` }}>
-          <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
-            <span style={{ fontSize: "2rem" }}>📡</span>
-            <div>
-              <h3 style={{ margin: 0, fontSize: "1.3rem", fontWeight: 700 }}>PROXIMITY & MOTION</h3>
-              <span style={{ fontSize: "0.82rem", color: "#6b7280" }}>HC-SR04 Ultrasonic + PIR motion sensor</span>
-            </div>
-          </div>
-          <button className="modal-close" onClick={onClose}>✕</button>
-        </div>
-
-        <div className="detail-modal-body">
-          <div className="detail-stats-row">
-            <div className="detail-stat detail-stat--main" style={{ borderColor: distColor + "44" }}>
-              <span className="detail-stat-label">Distance</span>
-              <span className="detail-stat-value" style={{ color: distColor }}>{proximity.distance} cm</span>
-              <span className="detail-trend" style={{ color: distColor }}>● {distLabel}</span>
-            </div>
-            <div className="detail-stat">
-              <span className="detail-stat-label">Motion</span>
-              <span className="detail-stat-num" style={{ color: proximity.motion ? "#ef4444" : "#22c55e" }}>
-                {proximity.motion ? "🚨 YES" : "✅ NO"}
-              </span>
-            </div>
-            <div className="detail-stat">
-              <span className="detail-stat-label">Max Range</span>
-              <span className="detail-stat-num">400 cm</span>
-            </div>
-            <div className="detail-stat">
-              <span className="detail-stat-label">PIR Angle</span>
-              <span className="detail-stat-num">120°</span>
-            </div>
-          </div>
-
-          <div className="detail-graph-section">
-            <div className="detail-section-title">📏 Distance Visualizer</div>
-            <div style={{ background: "#f9fafb", borderRadius: "14px", padding: "20px", border: "1px solid #f3f4f6" }}>
-              <div style={{ display: "flex", justifyContent: "space-between", fontSize: "0.78rem", color: "#9ca3af", marginBottom: "8px" }}>
-                <span>0 cm</span><span>100 cm</span><span>200 cm</span><span>300 cm</span><span>400 cm</span>
-              </div>
-              <div style={{ height: "24px", background: "#e5e7eb", borderRadius: "12px", overflow: "hidden", position: "relative" }}>
-                <div style={{
-                  width: `${Math.min(100, (proximity.distance / 400) * 100)}%`,
-                  height: "100%", background: distColor,
-                  borderRadius: "12px", transition: "width 0.5s ease",
-                  display: "flex", alignItems: "center", justifyContent: "flex-end", paddingRight: "8px",
-                }}>
-                  <span style={{ color: "white", fontSize: "0.75rem", fontWeight: 700 }}>{proximity.distance} cm</span>
-                </div>
-              </div>
-              <div style={{ marginTop: "12px", display: "flex", gap: "8px" }}>
-                {[
-                  { label: "< 30 cm", color: "#ef4444", desc: "Very Close — Danger zone" },
-                  { label: "30–80 cm", color: "#f59e0b", desc: "Near — Caution" },
-                  { label: "> 80 cm", color: "#22c55e", desc: "Clear — Safe" },
-                ].map((z) => (
-                  <div key={z.label} style={{ flex: 1, background: z.color + "15", border: `1px solid ${z.color}44`, borderRadius: "10px", padding: "8px 10px" }}>
-                    <div style={{ fontSize: "0.75rem", fontWeight: 700, color: z.color }}>{z.label}</div>
-                    <div style={{ fontSize: "0.7rem", color: "#6b7280" }}>{z.desc}</div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-
-          <div className={`motion-banner ${proximity.motion ? "motion-banner--alert" : "motion-banner--clear"}`} style={{ borderRadius: "16px" }}>
-            <span className="motion-icon">{proximity.motion ? "🚨" : "✅"}</span>
-            <div className="motion-info">
-              <span className="motion-title">{proximity.motion ? "Motion Detected!" : "Field Clear — No Motion"}</span>
-              <span className="motion-sub">PIR HC-SR501 sensor · Detection angle: 120° · Detection range: up to 7 m</span>
-            </div>
-            {proximity.motion && <span className="motion-pulse" />}
-          </div>
-
-          <div className="detail-two-col">
-            <div className="detail-info-box">
-              <div className="detail-section-title">🔬 HC-SR04 Ultrasonic Specs</div>
-              <table className="detail-table">
-                <tbody>
-                  <tr><td>Sensor Model</td><td>HC-SR04</td></tr>
-                  <tr><td>Measuring Range</td><td>2 cm – 400 cm</td></tr>
-                  <tr><td>Accuracy</td><td>±3 mm</td></tr>
-                  <tr><td>Measuring Angle</td><td>15°</td></tr>
-                  <tr><td>Frequency</td><td>40 kHz</td></tr>
-                  <tr><td>Supply Voltage</td><td>5V DC</td></tr>
-                  <tr><td>Protocol</td><td>GPIO Trigger/Echo</td></tr>
-                </tbody>
-              </table>
-            </div>
-            <div className="detail-info-box">
-              <div className="detail-section-title">🔬 PIR HC-SR501 Specs</div>
-              <table className="detail-table">
-                <tbody>
-                  <tr><td>Sensor Model</td><td>HC-SR501 PIR</td></tr>
-                  <tr><td>Detection Range</td><td>Up to 7 m</td></tr>
-                  <tr><td>Detection Angle</td><td>120°</td></tr>
-                  <tr><td>Delay Time</td><td>0.3s – 5 min</td></tr>
-                  <tr><td>Supply Voltage</td><td>4.5V – 20V</td></tr>
-                  <tr><td>Protocol</td><td>GPIO Digital High/Low</td></tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-
-          <div className="detail-info-box">
-            <div className="detail-section-title">📶 Connectivity & Power</div>
-            <div style={{ display: "flex", gap: "20px", flexWrap: "wrap" }}>
-              <WifiSignal rssi={proximity.rssi} />
-              <BatteryBar voltage={proximity.voltage} />
-              <LastPing secondsAgo={proximity.pingAge} />
-            </div>
-          </div>
-        </div>
-
-        <div className="modal-footer">
-          <button className="btn-cancel" onClick={onClose}>Close</button>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-// ── Camera Detail Modal ───────────────────────────────────────────────────────
-
-function CameraDetailModal({ boardName, onClose }) {
-  const [snapIndex, setSnapIndex] = useState(0);
-  const [loading, setLoading] = useState(false);
-  const [lastCaptured, setLastCaptured] = useState(new Date());
-
-  function captureSnapshot() {
-    setLoading(true);
-    setTimeout(() => {
-      setSnapIndex((p) => (p + 1) % CAMERA_SNAPSHOTS.length);
-      setLastCaptured(new Date());
-      setLoading(false);
-    }, 800);
-  }
-
-  const fmt = (d) => d.toLocaleTimeString("en-IN", { hour: "2-digit", minute: "2-digit", second: "2-digit" });
-
-  return (
-    <div className="modal-overlay" onClick={onClose}>
-      <div className="modal detail-modal" onClick={(e) => e.stopPropagation()}>
-        <div className="detail-modal-header" style={{ borderBottom: "3px solid #356f1f" }}>
-          <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
-            <span style={{ fontSize: "2rem" }}>📷</span>
-            <div>
-              <h3 style={{ margin: 0, fontSize: "1.3rem", fontWeight: 700 }}>CAMERA FEED</h3>
-              <span style={{ fontSize: "0.82rem", color: "#6b7280" }}>PiCamera v2 · {boardName}</span>
-            </div>
-          </div>
-          <button className="modal-close" onClick={onClose}>✕</button>
-        </div>
-
-        <div className="detail-modal-body">
-          <div className="detail-stats-row">
-            <div className="detail-stat detail-stat--main" style={{ borderColor: "#356f1f44" }}>
-              <span className="detail-stat-label">Status</span>
-              <span className="detail-stat-value" style={{ color: "#356f1f", fontSize: "1.6rem" }}>🟢 Live</span>
-            </div>
-            <div className="detail-stat">
-              <span className="detail-stat-label">Resolution</span>
-              <span className="detail-stat-num">8 MP</span>
-            </div>
-            <div className="detail-stat">
-              <span className="detail-stat-label">FOV</span>
-              <span className="detail-stat-num">62.2°</span>
-            </div>
-            <div className="detail-stat">
-              <span className="detail-stat-label">Last Snap</span>
-              <span className="detail-stat-num" style={{ fontSize: "0.8rem" }}>{fmt(lastCaptured)}</span>
-            </div>
-          </div>
-
-          <div className="detail-graph-section">
-            <div className="detail-section-title">📸 Camera View</div>
-            <div style={{ borderRadius: "18px", overflow: "hidden", position: "relative", background: "#111" }}>
-              {loading && (
-                <div className="camera-loading">
-                  <div className="camera-spinner" />
-                  <span>Capturing…</span>
-                </div>
-              )}
-              <img src={CAMERA_SNAPSHOTS[snapIndex]} alt="Pi Camera snapshot"
-                style={{ width: "100%", display: "block", maxHeight: "360px", objectFit: "cover", opacity: loading ? 0 : 1, transition: "opacity 0.4s ease" }} />
-              <div className="camera-timestamp">
-                <span className="camera-rec">● REC</span>
-                <span>{fmt(lastCaptured)}</span>
-              </div>
-            </div>
-            <div className="camera-controls" style={{ marginTop: "10px" }}>
-              <button className="cam-btn cam-btn--primary" onClick={captureSnapshot} disabled={loading}>
-                {loading ? "Capturing…" : "📸 Capture Snapshot"}
-              </button>
-            </div>
-          </div>
-
-          <div className="detail-graph-section">
-            <div className="detail-section-title">🖼️ Snapshot Gallery</div>
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "8px" }}>
-              {CAMERA_SNAPSHOTS.slice(0, 6).map((src, i) => (
-                <div key={i} onClick={() => setSnapIndex(i)}
-                  style={{ borderRadius: "12px", overflow: "hidden", cursor: "pointer", border: `2px solid ${i === snapIndex ? "#356f1f" : "transparent"}`, transition: "border-color 0.2s" }}>
-                  <img src={src} alt={`Snapshot ${i + 1}`} style={{ width: "100%", height: "70px", objectFit: "cover", display: "block" }} />
-                </div>
-              ))}
-            </div>
-          </div>
-
-          <div className="detail-two-col">
-            <div className="detail-info-box">
-              <div className="detail-section-title">🔬 Camera Specifications</div>
-              <table className="detail-table">
-                <tbody>
-                  <tr><td>Model</td><td>PiCamera v2</td></tr>
-                  <tr><td>Sensor</td><td>Sony IMX219</td></tr>
-                  <tr><td>Resolution</td><td>3280 × 2464 px (8MP)</td></tr>
-                  <tr><td>FOV</td><td>62.2° (H) × 48.8° (V)</td></tr>
-                  <tr><td>Focal Length</td><td>3.04 mm</td></tr>
-                  <tr><td>Interface</td><td>CSI (Camera Serial)</td></tr>
-                  <tr><td>Frame Rate</td><td>30 fps @ 1080p</td></tr>
-                </tbody>
-              </table>
-            </div>
-            <div className="detail-info-box">
-              <div className="detail-section-title">📶 Connectivity</div>
-              <WifiSignal rssi={-50} />
-              <div className="ping-row" style={{ marginTop: "10px" }}>
-                <span className="ping-dot" style={{ background: "#22c55e" }} />
-                <span className="ping-label">Streaming active</span>
-              </div>
-              <div className="detail-section-title" style={{ marginTop: "16px" }}>ℹ️ Use Cases</div>
-              <div className="detail-desc-box">
-                <p>Crop health monitoring, intruder detection, growth tracking, and remote field inspection. Captured images can be sent to Firebase Storage for AI-based crop disease detection.</p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div className="modal-footer">
-          <button className="btn-cancel" onClick={onClose}>Close</button>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-// ── Proximity card ────────────────────────────────────────────────────────────
-
-function ProximityCard({ distance, motionDetected, rssi, voltage, pingAge, onClick }) {
-  const distColor = distance < 30 ? "#ef4444" : distance < 80 ? "#f59e0b" : "#22c55e";
-  const distLabel = distance < 30 ? "Very Close" : distance < 80 ? "Near" : "Clear";
-
-  return (
-    <div className="card param-card clickable-card" onClick={onClick} title="Click for details">
-      <div className="card-top">
-        <div className="card-title-group">
-          <span className="card-emoji">📡</span>
-          <span className="card-title">PROXIMITY & MOTION</span>
-        </div>
-        <span className="sensor-chip">HC-SR04 + PIR</span>
-      </div>
-      <div className="expand-hint">🔍 Click for details</div>
-      <div className="prox-section">
-        <div className="prox-label">Ultrasonic Distance</div>
-        <div className="prox-value" style={{ color: distColor }}>{distance} cm</div>
-        <div className="prox-bar-track">
-          <div className="prox-bar-fill" style={{ width: `${Math.min(100, (distance / 400) * 100)}%`, background: distColor }} />
-        </div>
-        <div className="prox-status" style={{ color: distColor }}>● {distLabel}</div>
-      </div>
-      <div className={`motion-banner ${motionDetected ? "motion-banner--alert" : "motion-banner--clear"}`}>
-        <span className="motion-icon">{motionDetected ? "🚨" : "✅"}</span>
-        <div className="motion-info">
-          <span className="motion-title">{motionDetected ? "Motion Detected!" : "No Motion"}</span>
-          <span className="motion-sub">PIR sensor — 120° detection angle</span>
-        </div>
-        {motionDetected && <span className="motion-pulse" />}
-      </div>
-      <div className="info-block">
-        <p className="info-desc">HC-SR04 measures distance via ultrasonic pulse echo (2–400 cm). PIR detects infrared movement for intruder/animal alerts.</p>
-        <span className="info-range">Ultrasonic range: 2–400 cm &nbsp;|&nbsp; PIR angle: 120° &nbsp;|&nbsp; PIR range: 7 m</span>
-      </div>
-      <div className="status-row">
-        <WifiSignal rssi={rssi} />
-        <BatteryBar voltage={voltage} />
-        <LastPing secondsAgo={pingAge} />
-      </div>
-    </div>
-  );
-}
-
-// ── Camera card ───────────────────────────────────────────────────────────────
-
-function CameraCard({ boardName, onClick }) {
-  const [snapIndex, setSnapIndex] = useState(0);
-  const [loading, setLoading] = useState(false);
-  const [lastCaptured, setLastCaptured] = useState(new Date());
-  const [autoRefresh, setAutoRefresh] = useState(false);
-  const [countdown, setCountdown] = useState(30);
-  const autoRef = useRef(null);
-  const cdRef = useRef(null);
-
-  function captureSnapshot(e) {
-    if (e) e.stopPropagation();
-    setLoading(true);
-    setTimeout(() => {
-      setSnapIndex((p) => (p + 1) % CAMERA_SNAPSHOTS.length);
-      setLastCaptured(new Date());
-      setLoading(false);
-      setCountdown(30);
-    }, 800);
-  }
-
-  useEffect(() => {
-    if (autoRefresh) {
-      autoRef.current = setInterval(captureSnapshot, 30000);
-      cdRef.current = setInterval(() => setCountdown((c) => (c <= 1 ? 30 : c - 1)), 1000);
-    } else {
-      clearInterval(autoRef.current);
-      clearInterval(cdRef.current);
-      setCountdown(30);
-    }
-    return () => { clearInterval(autoRef.current); clearInterval(cdRef.current); };
-  }, [autoRefresh]);
-
-  const fmt = (d) => d.toLocaleTimeString("en-IN", { hour: "2-digit", minute: "2-digit", second: "2-digit" });
-
-  return (
-    <div className="card camera-card clickable-card" onClick={onClick} title="Click for details">
-      <div className="card-top">
-        <div className="card-title-group">
-          <span className="card-emoji">📷</span>
-          <span className="card-title">CAMERA FEED</span>
-        </div>
-        <span className="camera-source">{boardName}</span>
-      </div>
-      <div className="expand-hint">🔍 Click for details</div>
-      <div className="camera-frame">
-        {loading && (
-          <div className="camera-loading">
-            <div className="camera-spinner" />
-            <span>Capturing…</span>
-          </div>
-        )}
-        <img src={CAMERA_SNAPSHOTS[snapIndex]} alt="Pi Camera snapshot"
-          className={`camera-img ${loading ? "camera-img--hidden" : ""}`} />
-        <div className="camera-timestamp">
-          <span className="camera-rec">● REC</span>
-          <span>{fmt(lastCaptured)}</span>
-        </div>
-      </div>
-      <div className="camera-controls">
-        <button className="cam-btn cam-btn--primary" onClick={captureSnapshot} disabled={loading}>
-          {loading ? "Capturing…" : "📸 Capture"}
-        </button>
-        <button className={`cam-btn ${autoRefresh ? "cam-btn--active" : ""}`}
-          onClick={(e) => { e.stopPropagation(); setAutoRefresh((v) => !v); }}>
-          {autoRefresh ? `⏱ Auto (${countdown}s)` : "⏱ Auto Refresh"}
-        </button>
-      </div>
-      <div className="info-block">
-        <p className="info-desc">PiCamera v2 — 8MP Sony IMX219. Field snapshots for crop health monitoring and intruder detection.</p>
-        <span className="info-range">Resolution: 3280 × 2464 px &nbsp;|&nbsp; FOV: 62.2°</span>
-      </div>
-      <div className="status-row">
-        <WifiSignal rssi={-50} />
-        <div className="ping-row">
-          <span className="ping-dot" style={{ background: "#22c55e" }} />
-          <span className="ping-label">Last snapshot at {fmt(lastCaptured)}</span>
-        </div>
-      </div>
-    </div>
-  );
-}
-
+    
 // ── Param card ────────────────────────────────────────────────────────────────
 
 function ParamCard({ param, onRemove, onClick }) {
@@ -1299,7 +860,7 @@ function AddModal({ onClose, onAdd }) {
             <option value="soil">Soil</option>
             <option value="wind">Wind</option>
             <option value="light">Light</option>
-            <option value="proximity">Proximity</option>
+        
             <option value="motion">Motion</option>
             <option value="other">Other</option>
           </select>
@@ -1532,14 +1093,16 @@ export default function App() {
   const [showBoardModal, setShowBoardModal] = useState(false);
   const [showAlertPanel, setShowAlertPanel] = useState(false);
   const [showSettings, setShowSettings] = useState(false);
-  const [alertsEnabled, setAlertsEnabled] = useState(true);
+const [alertsEnabled, setAlertsEnabled] = useState(() => {
+  const saved = localStorage.getItem("alertsEnabled");
+  return saved !== null ? JSON.parse(saved) : true;
+});
   const [selectedBoard, setSelectedBoard] = useState(BOARDS[0]);
   const [alertLog, setAlertLog] = useState([]);
   const [toasts, setToasts] = useState([]);
   const [detailParam, setDetailParam] = useState(null);
   const [parameters, setParameters] = useState([]);
   const [sensorHistory, setSensorHistory] = useState([]);
-  const [proximity, setProximity] = useState({ distance: 120, motion: false, rssi: -52, voltage: 4.0, pingAge: 2 });
   const [now, setNow] = useState(new Date());
   const [bgIndex, setBgIndex] = useState(0);
   const [fadeIn, setFadeIn] = useState(true);
@@ -1569,7 +1132,7 @@ useEffect(() => {
   const fetchSensorData = async () => {
     try {
       const response = await fetch(
-       "https://smart-agri-backend-b2td.onrender.com/get-sensors"
+     "https://smart-agri-backend-b2td.onrender.com/get-sensors"
       );
 
       const data = await response.json();
@@ -1581,7 +1144,9 @@ useEffect(() => {
 const historyData = await historyResponse.json();
 
 const temperatureHistory =
-  historyData.map(item => item.temperature);
+  historyData.map(item =>
+    Number(item.air_temperature_c ?? item.temperature ?? 0)
+  );
 
 const humidityHistory =
   historyData.map(item => item.humidity);
@@ -1750,11 +1315,13 @@ value: String(
 
   return () => clearInterval(interval);
 }, []);
-  useEffect(() => {
-    if (!alertsEnabled) return;
-    parameters.forEach((param) => {
-      const alert = checkThreshold(param);
+
+useEffect(() => {
+  if (!alertsEnabled) return;
+  parameters.forEach((param) => {
+    const alert = checkThreshold(param);
       if (alert) {
+      
         const key = `${param.id}-${alert.level}`;
         const n = new Date();
         const timeDiff = alertedRef.current[key] ? (n - alertedRef.current[key]) / 1000 : Infinity;
@@ -1767,31 +1334,7 @@ value: String(
         }
       }
     });
-    if (proximity.motion) {
-      const key = "proximity-motion";
-      const n = new Date();
-      const timeDiff = alertedRef.current[key] ? (n - alertedRef.current[key]) / 1000 : Infinity;
-      if (timeDiff > 15) {
-        alertedRef.current[key] = n;
-        const entry = { id: Date.now() + Math.random(), title: "PROXIMITY SENSOR", message: "⚠️ Motion detected in the field!", level: "danger", time: n.toLocaleTimeString("en-IN") };
-        setAlertLog((prev) => [...prev, entry]);
-        setToasts((prev) => [...prev.slice(-2), entry]);
-        setTimeout(() => setToasts((prev) => prev.filter((t) => t.id !== entry.id)), 5000);
-      }
-    }
-    if (proximity.distance < 30) {
-      const key = "proximity-distance";
-      const n = new Date();
-      const timeDiff = alertedRef.current[key] ? (n - alertedRef.current[key]) / 1000 : Infinity;
-      if (timeDiff > 20) {
-        alertedRef.current[key] = n;
-        const entry = { id: Date.now() + Math.random(), title: "PROXIMITY SENSOR", message: `Object very close: ${proximity.distance} cm`, level: "warning", time: n.toLocaleTimeString("en-IN") };
-        setAlertLog((prev) => [...prev, entry]);
-        setToasts((prev) => [...prev.slice(-2), entry]);
-        setTimeout(() => setToasts((prev) => prev.filter((t) => t.id !== entry.id)), 5000);
-      }
-    }
-  }, [parameters, proximity]);
+  }, [alertsEnabled, parameters]);
 
   const formatDate = (d) => d.toLocaleDateString("en-IN", { weekday: "long", year: "numeric", month: "long", day: "numeric" });
   const formatTime = (d) => d.toLocaleTimeString("en-IN", { hour: "2-digit", minute: "2-digit", second: "2-digit" });
@@ -1834,28 +1377,7 @@ value: String(
   />
 )}
 
-     {detailParam === "camera" && (
-  <CameraDetailModal
-    boardName={selectedBoard.name}
-    onClose={() => setDetailParam(null)}
-  />
-)}
 
-{detailParam === "proximity" && (
-  <ProximityDetailModal
-    proximity={proximity}
-    onClose={() => setDetailParam(null)}
-  />
-)}
-
-{detailParam &&
-  detailParam !== "camera" &&
-  detailParam !== "proximity" && (
-    <DetailModal
-      param={liveDetailParam}
-      onClose={() => setDetailParam(null)}
-    />
-)}
       <div className="app">
         <header className="header">
           <h1>smart agriculture</h1>
@@ -1864,7 +1386,6 @@ value: String(
             <button className="board-badge" onClick={() => setShowBoardModal(true)}>
               <span className="board-badge-icon" style={{ background: selectedBoard.color }}>{selectedBoard.icon}</span>
               {selectedBoard.short}
-              <span className="board-badge-chevron">▾</span>
             </button>
             <div className="menu">
               <button className="menu-btn" onClick={() => setMenuOpen(!menuOpen)}>⋮</button>
@@ -1887,7 +1408,11 @@ value: String(
             <div className="sidebar-overlay" />
             <div className="sidebar-content">
               <h2>ABOUT THE PROJECT</h2>
-              <p>Real-time monitoring of temperature, humidity, rainfall and soil moisture using {selectedBoard.name}, Firebase and React.</p>
+              <p style={{ color: "#fff" }}>
+                Smart Agriculture Monitoring System powered by Raspberry Pi, Firebase and React.
+                Provides real-time insights into temperature, humidity, soil moisture, pH,
+                conductivity and NPK nutrient levels.
+              </p>
               <div className="connected-board">
                 <div className="connected-dot" />
                 <span>Connected to {selectedBoard.name}</span>
@@ -1905,30 +1430,24 @@ value: String(
                 <div className="calendar-time">{formatTime(now)}</div>
               </div>
             </div>
-          </aside>
-
-          <main className="grid">
-            <CameraCard boardName={selectedBoard.name} onClick={() => setDetailParam("camera")} />
-            <ProximityCard
-              distance={proximity.distance}
-              motionDetected={proximity.motion}
-              rssi={proximity.rssi}
-              voltage={proximity.voltage}
-              pingAge={proximity.pingAge}
-              onClick={() => setDetailParam("proximity")}
-            />
-            {parametersWithAlerts.map((param) => (
-              <ParamCard key={param.id} param={param} onRemove={handleRemoveParameter} onClick={() => setDetailParam(param)} />
-            ))}
-            <div className="card add-card" onClick={() => setShowAddModal(true)}>
-              <div className="add-card-inner">
-                <span className="add-icon">+</span>
-                <span>Add Parameter</span>
-              </div>
-            </div>
-          </main>
+        </aside>
+        <main className="dashboard">
+  <div className="cards-grid">
+    {parametersWithAlerts.map((param) => (
+      <ParamCard
+        key={param.id}
+        param={param}
+        onRemove={handleRemoveParameter}
+        onClick={() => setDetailParam(param)}
+      />
+    ))}
+  </div>
+</main>
         </div>
       </div>
     </>
   );
 }
+
+
+
